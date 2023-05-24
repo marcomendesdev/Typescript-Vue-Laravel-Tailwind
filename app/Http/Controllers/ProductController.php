@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -23,8 +24,26 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        // add new product
-        $product = Product::create($request->validated());
+        $validatedData = $request->validated();
+
+        $user = auth()->user();
+
+        $product = new Product([
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'price' => $validatedData['price'],
+            'user_id' => $validatedData['user_id'],
+            'image' => $validatedData['image'],
+        ]);
+
+        // if ($request->hasFile('image')) {
+        //     $image = $request->file('image');
+        //     $filename = time() . '.' . $image->getClientOriginalExtension();
+        //     $image->storeAs('public/images', $filename);
+        //     $product->image = $filename;
+        // }
+        /** @var \App\Models\User $user */
+        $user->products()->save($product);
 
         return new ProductResource($product);
     }
@@ -34,8 +53,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        // display product
-        return new ProductResource($product);
+        $user = Auth::user();
+        /** @var \App\Models\User $user */
+        $products = Product::where('user_id', $user->id)->get();
+
+        return ProductResource::collection($products);
     }
 
     /**
@@ -57,6 +79,6 @@ class ProductController extends Controller
         // delete product
         $product->delete();
 
-        return response()->noContent();
+        return response(['message' => 'Product deleted']);
     }
 }
