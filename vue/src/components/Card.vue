@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div
-    class="max-w-sm bg-white rounded-xl shadow-2xl shadow-slate-900 dark:bg-gray-800 w-[18rem] m-auto h-full items-stretch flex flex-col"
+    class="max-w-sm bg-white rounded-2xl shadow-2xl shadow-slate-900 dark:bg-gray-800 w-[18rem] m-auto h-full items-stretch flex flex-col"
   >
     <a href="#">
-      <img class="rounded-t-xl" :src="imageSrc" alt="" />
+      <img class="rounded-t-2xl" :src="imageSrc" alt="" />
     </a>
     <div class="p-5 flex flex-1 flex-col justify-between">
       <a href="#">
