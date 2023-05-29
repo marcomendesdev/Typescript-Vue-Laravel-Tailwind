@@ -6,6 +6,7 @@
       :class="sidebarClass"
       @transitionend="handleTransitionEnd"
       class="absolute inset-y-0 left-0 z-20 flex flex-col"
+      id="sidebar"
     >
       <!-- Sidebar content goes here -->
       <button @click="toggleSidebar" class="p-4">
@@ -27,9 +28,9 @@
       <div class="ml-8 mt-16">
         <nav>
           <ul>
-            <li class="p-2 hover:bg-sky-700"><RouterLink to="/items">All items</RouterLink></li>
-            <li class="p-2 hover:bg-sky-700"><RouterLink to="/user-items">My items</RouterLink></li>
-            <li class="p-2 hover:bg-sky-700"><RouterLink to="/add-item">Add item</RouterLink></li>
+            <li class="p-2 hover:bg-sky-700"><RouterLink @click.prevent="togs" to="/items">All items</RouterLink></li>
+            <li class="p-2 hover:bg-sky-700"><RouterLink @click.prevent="togs" to="/user-items">My items</RouterLink></li>
+            <li class="p-2 hover:bg-sky-700"><RouterLink @click.prevent="togs" to="/add-item">Add item</RouterLink></li>
           </ul>
         </nav>
       </div>
@@ -39,7 +40,7 @@
     <div class="flex-grow bg-gray-100 min-h-screen">
       <!-- Header -->
       <header class="bg-gray-800 p-4 shadow-lg shadow-gray-500 flex justify-between">
-        <button @click="toggleSidebar" class="p-2">
+        <button @click.stop="toggleSidebar" class="p-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 text-white"
@@ -77,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 
@@ -85,9 +86,9 @@ const isSidebarOpen = ref(false)
 const router = useRouter()
 const appStore = useAppStore()
 
-const toggleSidebar = () => {
+const toggleSidebar = (event: MouseEvent) => {
+  event.stopPropagation()
   isSidebarOpen.value = !isSidebarOpen.value
-  
 }
 
 const sidebarClass = computed(() => {
@@ -95,6 +96,10 @@ const sidebarClass = computed(() => {
     ? 'fixed inset-y-0 left-0 bg-gray-800 text-white w-44 flex-shrink-0 transition-transform transform translate-x-0 shadow-lg shadow-gray-500'
     : 'fixed inset-y-0 left-0 bg-gray-800 text-white w-44 flex-shrink-0 transition-transform transform -translate-x-full'
 })
+
+const togs = () => {
+  isSidebarOpen.value = false
+}
 
 const handleTransitionEnd = () => {
   if (!isSidebarOpen.value) {
@@ -106,5 +111,20 @@ const logout = () => {
   appStore.logoutUser().then(() => {
     router.push('/login')
   })
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
+
+const handleClickOutside = (event: MouseEvent) => {
+  const sidebar = document.getElementById('sidebar')
+  if (sidebar && !sidebar.contains(event.target as Node)) {
+    isSidebarOpen.value = false
+  }
 }
 </script>
