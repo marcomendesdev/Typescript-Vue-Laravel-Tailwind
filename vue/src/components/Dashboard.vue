@@ -87,6 +87,7 @@ const appStore = useAppStore()
 
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value
+  
 }
 
 const sidebarClass = computed(() => {
