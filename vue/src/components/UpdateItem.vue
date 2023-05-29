@@ -120,7 +120,7 @@ const { show } = toRefs(props)
 const open = ref(false)
 
 watch(show, () => {
-  open.value = show.value
+  open.value = !open.value
   console.log('id', props.id)
   console.log('show', show.value)
 })
