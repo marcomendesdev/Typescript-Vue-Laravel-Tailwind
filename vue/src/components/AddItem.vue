@@ -11,22 +11,7 @@
           mode="render"
           block=""
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            aria-hidden="true"
-            role="img"
-            width="1em"
-            height="1em"
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 26 26"
-            class="iconify iconify--wpf"
-          >
-            <path
-              d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557z"
-              fill="currentColor"
-            ></path>
-          </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path d="M450-320v-260H330v-60h300v60H510v260h-60ZM40-40v-213h79v-454H40v-213h213v79h454v-79h213v213h-79v454h79v213H707v-79H253v79H40Zm213-139h454v-74h74v-454h-74v-74H253v74h-74v454h74v74ZM100-767h93v-93h-93v93Zm667 0h93v-93h-93v93Zm0 667h93v-93h-93v93Zm-667 0h93v-93h-93v93Zm667-667Zm0 574Zm-574 0Zm0-574Z" fill="currentColor"/></svg>
         </span>
         <input
           v-model="name"
@@ -43,12 +28,7 @@
           mode="render"
           block=""
         >
-          <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28">
-            <path
-              d="M140-160q-24 0-42-18t-18-42v-520q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H140Zm340-302L140-685v465h680v-465L480-462Zm0-60 336-218H145l335 218ZM140-685v-55 520-465Z"
-              fill="currentColor"
-            />
-          </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path d="M480-120v-71l216-216 71 71-216 216h-71ZM120-330v-60h300v60H120Zm690-49-71-71 29-29q8-8 21-8t21 8l29 29q8 8 8 21t-8 21l-29 29ZM120-495v-60h470v60H120Zm0-165v-60h470v60H120Z" fill="currentColor"/></svg>
         </span>
         <input
           v-model="description"
@@ -65,12 +45,7 @@
           mode="render"
           block=""
         >
-          <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28">
-            <path
-              d="M280-412q-28 0-48-20t-20-48q0-28 20-48t48-20q28 0 48 20t20 48q0 28-20 48t-48 20Zm0 172q-100 0-170-70T40-480q0-100 70-170t170-70q72 0 126 34t85 103h344q6 0 11 2t10 7l82 82q5 5 7 10.5t2 11.5q0 6-2.5 11t-7.5 10L812-334q-4 4-9 6t-10 2q-5 0-9.5-1t-9.5-4l-69-50-70 51q-4 3-8.5 4t-9.5 1q-5 0-9.5-1.5T599-331l-57-46h-51q-25 60-78.5 98.5T280-240Zm0-60q58 0 107-38.5t63-98.5h114l54 45q-1 0 0 0h.5-.5l88-63 82 62h-.5.5l85-79 .5.5-.5-.5h.5-.5l-51-51H450q-12-56-60-96.5T280-660q-75 0-127.5 52.5T100-480q0 75 52.5 127.5T280-300Z"
-              fill="currentColor"
-            />
-          </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path d="M180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm56-97h489L578-473 446-302l-93-127-117 152Zm-56 97v-600 600Z" fill="currentColor"/></svg>
         </span>
         <input
           v-model="image"
