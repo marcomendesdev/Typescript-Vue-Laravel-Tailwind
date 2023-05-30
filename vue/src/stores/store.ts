@@ -20,8 +20,10 @@ export const useAppStore = defineStore('main', {
         }
       } catch (error: any) {
         const { response } = error
-        console.log('Error:', response.data.message);
-        throw response.data.message
+        console.log('Error:', response.data.message)
+        console.log('Message:', response.data.errors.password)
+        
+        throw response.data.errors.password
       }
     },
     async userLogin(user: any) {
@@ -31,7 +33,7 @@ export const useAppStore = defineStore('main', {
         localStorage.setItem('token', data.token)
       } catch (error: any) {
         const { response } = error
-        console.log('Error:', response.data.message);
+        console.log('Error:', response.data.message)
         throw response.data.message
       }
     },

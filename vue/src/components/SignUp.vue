@@ -6,7 +6,11 @@
   >
     <h2 class="text-2xl my-4 text-blue-950">Sign up</h2>
     <div class="w-full p-2 justify-start flex flex-col">
-      <div class="flex flex-row">
+      <div v-if="errors" class="bg-red-500 rounded text-center py-1 px-3">
+        <p v-for="err in errors" :key="err">{{ err }}</p>
+      </div>
+      
+      <div class="mt-4 flex flex-row">
         <span
           class="z-highest rounded-l-lg w-10 h-10 flex justify-center items-center text-2xl text-gray-400 border border-r-0"
           mode="render"
@@ -127,7 +131,7 @@ import { useRouter } from 'vue-router'
 
 const appStore = useAppStore()
 const router = useRouter()
-const err = ref('')
+const errors = ref('')
 
 const name = ref('')
 const email = ref('')
@@ -139,14 +143,14 @@ const signup = () => {
     name: name.value,
     email: email.value,
     password: password.value,
-    confirm_password: confirm_password.value
+    password_confirmation: confirm_password.value
   }
 
   appStore.userSignup(payload).then(() => {
     router.push('/dashboard')
   }).catch((error) => {
     console.log('Err:', error)
-    err.value = error
+    errors.value = error
   })
 }
 </script>
