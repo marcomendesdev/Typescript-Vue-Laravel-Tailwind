@@ -25,7 +25,7 @@ class StoreProductRequest extends FormRequest
             'name' => 'required|string|min:3|max:55',
             'description' => 'required|string|min:3|max:255',
             'price' => 'numeric',
-            'image' => 'url',
+            'image' => ['file','mimes:jpeg,png,jpg','max:2048'],
             'user_id' => 'required|numeric',
         ];
     }

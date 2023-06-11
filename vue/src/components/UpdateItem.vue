@@ -89,6 +89,33 @@
                     />
                   </div>
 
+                  <div class="flex flex-row">
+                    <span
+                      class="z-highest rounded-l-lg w-10 h-10 flex justify-center items-center text-2xl text-gray-400 border border-r-0"
+                      mode="render"
+                      block=""
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="28"
+                        viewBox="0 -960 960 960"
+                        width="28"
+                      >
+                        <path
+                          d="M220-160q-24 0-42-18t-18-42v-143h60v143h520v-143h60v143q0 24-18 42t-42 18H220Zm230-153v-371L330-564l-43-43 193-193 193 193-43 43-120-120v371h-60Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </span>
+                    <input
+                      ref="fileInput"
+                      @change="handleFileUpload"
+                      type="file"
+                      class="h-10 border border-gray-200 rounded-r-lg outline-none focus:ring-1 ring-blue-300 w-full pl-1 text-slate-600"
+                      required="false"
+                    />
+                  </div>
+
                   <button
                     class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 my-4 w-full"
                     type="submit"
@@ -106,35 +133,57 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs, watch } from 'vue'
-import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import axiosClient from '@/axiosClient'
+import { ref, toRefs, watch } from 'vue';
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
+import axiosClient from '@/axiosClient';
 
 const props = defineProps({
   show: Boolean,
   id: Number
-})
+});
 
 // eslint-disable-next-line vue/no-dupe-keys
-const { show } = toRefs(props)
-const open = ref(false)
+const { show } = toRefs(props);
+const open = ref(false);
 
 watch(show, () => {
-  open.value = !open.value
-  console.log('id', props.id)
-  console.log('show', show.value)
-})
+  open.value = !open.value;
+  console.log('id', props.id);
+  console.log('show', show.value);
+});
 
-const name = ref('')
-const description = ref('')
+const name = ref('');
+const description = ref('');
+const fileInput = ref<HTMLInputElement | null>(null);
+const selectedFile = ref<File | null>(null);
+
+const handleFileUpload = (event: Event) => {
+  const file = (event.target as HTMLInputElement).files?.[0] || null;
+  selectedFile.value = file;
+};
 
 const edit = async () => {
-  const { data } = await axiosClient.put(`/update-product/${props.id}`, {
-    name: name.value,
-    description: description.value
-  })
-  console.log('data', data)
-  open.value = false
-  location.reload()
-}
+  const formData = new FormData();
+  formData.append('name', name.value);
+  formData.append('description', description.value);
+
+  if (selectedFile.value) {
+    formData.append('image', selectedFile.value);
+  }
+    console.log('formData', formData);
+    
+  try {
+    const { data } = await axiosClient.post(`/update-product/${props.id}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+    console.log('data', data);
+    open.value = false;
+    window.location.reload();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 </script>

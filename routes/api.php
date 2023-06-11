@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(static function () {
     Route::get('/all-products', [ProductController::class, 'index']);
     Route::get('/user-products', [ProductController::class, 'show']);
-    Route::put('/update-product/{product}', [ProductController::class, 'update']);
+    Route::post('/update-product/{product}', [ProductController::class, 'update']);
     Route::delete('/delete-product/{product}', [ProductController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', function (Request $request) {

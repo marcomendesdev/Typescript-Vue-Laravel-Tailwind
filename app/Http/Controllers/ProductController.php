@@ -15,8 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // return all products
-        return ProductResource::collection(Product::paginate(10));
+        return ProductResource::collection(Product::paginate(4));
     }
 
     /**
@@ -36,17 +35,22 @@ class ProductController extends Controller
             'image' => $validatedData['image'],
         ]);
 
-        // if ($request->hasFile('image')) {
-        //     $image = $request->file('image');
-        //     $filename = time() . '.' . $image->getClientOriginalExtension();
-        //     $image->storeAs('public/images', $filename);
-        //     $product->image = $filename;
-        // }
-        /** @var \App\Models\User $user */
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            $image->storeAs('public/images', $filename);
+
+            $product->image = asset('storage/images/' . $filename);
+        }
+        /** @var \App\Models\Product $user */
         $user->products()->save($product);
 
         return new ProductResource($product);
     }
+
+
 
     /**
      * Display the specified resource.
@@ -65,18 +69,36 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        // update product
-        $product->update($request->validated());
+        $productData = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $image_path = public_path('storage/images/' . $product->image);
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $filename);
+            $productData['image'] = url('storage/images/' . $filename);
+        } else {
+            $productData['image'] = $product->image;
+        }
+
+        $product->update($productData);
+
+        $product->refresh();
 
         return new ProductResource($product);
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product)
     {
-        // delete product
         $product->delete();
 
         return response(['message' => 'Product deleted']);

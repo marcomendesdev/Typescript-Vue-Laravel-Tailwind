@@ -94,6 +94,12 @@ function fetchProducts() {
     products.value = data.data
     currentPage.value = data.meta.current_page
     totalPages.value = data.meta.last_page
+    console.log('Current Page', data.meta.current_page)
+    console.log('Last Page', data.meta.last_page)
+    console.log('Total Products', data.meta.total)
+    console.log('Data', data)
+
+    console.log('Products', data.data)
   })
 }
 
