@@ -15,7 +15,7 @@
 
       <div class="fixed inset-0 z-10 overflow-y-auto">
         <div
-          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+          class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0"
         >
           <TransitionChild
             as="template"
@@ -27,10 +27,10 @@
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+              class="relative transform overflow-hidden rounded-lg  text-left  transition-all sm:my-8 sm:w-full sm:max-w-lg"
             >
               <form
-                class="justify-center items-center w-90 shadow rounded-lg bg-white px-6 flex flex-col m-8"
+                class="justify-center items-center w-90 shadow rounded-lg bg-white flex flex-col p-4"
                 @submit.prevent="edit"
               >
                 <h2 class="text-2xl my-4 text-blue-950">Edit item</h2>

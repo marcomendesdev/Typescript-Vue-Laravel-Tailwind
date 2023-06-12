@@ -19,7 +19,7 @@
         <template v-if="$slots['button-edit']">
         <a
           href="#"
-          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-16 mx-auto mr-2"
+          class="py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-16 mx-auto mr-2"
           @click="$emit('edit')"
         >
           <slot name="button-edit"></slot>
@@ -28,7 +28,7 @@
       <template v-if="$slots['button-delete']">
         <a
           href="#"
-          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 w-16 mx-auto"
+          class="py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 w-16 mx-auto"
           @click="$emit('delete')"
         >
           <slot name="button-delete"></slot>
